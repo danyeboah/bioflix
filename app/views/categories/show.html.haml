@@ -1,0 +1,11 @@
+%article.video_category
+  %header
+    %h1.lead
+      =link_to "#{@category.name}", category_path(@category)
+    %br
+    %hr
+    .videos.row
+      -@category.videos.each do |video|
+        .video.col-sm-3
+          =link_to video_path(video) do
+            =image_tag(video.small_cover_url, size: '166x236')

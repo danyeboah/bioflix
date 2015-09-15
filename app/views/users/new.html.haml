@@ -1,0 +1,20 @@
+%section.register.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %header
+        %h1.lead Register
+        %hr.hr1
+
+      %fieldset
+        = bootstrap_form_for @user, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-4" do |f|
+          = f.text_field :firstname, label: "First name:", icon: "user"
+     
+          = f.text_field :lastname, label: "Last name:", icon: "user"
+         
+          = f.email_field :email, label: "Email address:", icon: "envelope"
+          
+          = f.password_field :password, label: "Password:"
+            
+          = f.password_field :password_confirmation, label: "Confirm Password:"
+
+          = f.submit "Sign Up", class: 'btn btn-success col-sm-offset-2'

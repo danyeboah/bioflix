@@ -1,0 +1,14 @@
+%article.video_category
+  %header
+    -@categories.each do |category|
+      %h3= link_to "#{category.name}", category_path(category)
+      %br
+      .videos.row
+        -category.recent_videos(6).each do |video|
+          .video.col-sm-3
+            =link_to video_path(video) do
+              =image_tag(video.small_cover_url, size: '166x236')
+      %br
+      %hr
+
+       
