@@ -7,10 +7,10 @@ describe Video do
 
   describe "search_by_title" do
     before :each do
-      The_League = Video.create(title: "The League", description: "Bros", small_cover_url: "Videos/TheLeague_small.jpg")
-      Futurama = Video.create(title: "Futurama", description: "Cool Story", small_cover_url: "/tmp/futurama.jpg")
-      South_Park = Video.create(title: "South Park", description: "Too funny", small_cover_url: "/tmp/south_park.jpg")
-      The_Future = Video.create(title: "The Future", description: "Cool Baby", small_cover_url: "/tmp/futurama.jpg")
+      the_league = Video.create(title: "The League", description: "Bros", small_cover_url: "Videos/TheLeague_small.jpg")
+      futurama = Video.create(title: "Futurama", description: "Cool Story", small_cover_url: "/tmp/futurama.jpg")
+      south_park = Video.create(title: "South Park", description: "Too funny", small_cover_url: "/tmp/south_park.jpg")
+      the_future = Video.create(title: "The Future", description: "Cool Baby", small_cover_url: "/tmp/futurama.jpg")
 
     end
 

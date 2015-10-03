@@ -13,10 +13,10 @@ class SessionsController < ApplicationController
         cookies.signed[:auth_token] = user.auth_token
       end
 
-      flash["notice"] = "You have been successfully logged in"
+      flash["success"] = "You have been successfully logged in"
       redirect_to videos_path
     else 
-      flash[:error] = "Username or password is invalid"
+      flash["error"] = "Username or password is invalid"
       redirect_to login_path
     end
   end

@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
   include Slug
-  sluggable_column :lastname
+  sluggable_column :last_name
   before_save :generate_slug
 
-  validates_presence_of :firstname
-  validates_presence_of :lastname
+  validates_presence_of :first_name
+  validates_presence_of :last_name
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: {minimum: 6}, on: :create
@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   def generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64
-    end while User.exists?(column == self[column])
+    end while User.exists?(column => self[column])
   end
 
 end
