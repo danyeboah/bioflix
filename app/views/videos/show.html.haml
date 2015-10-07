@@ -8,7 +8,9 @@
           %h3.lead 
           =@video.title 
           %br
-          %span "Rating: #{@video.rating}/5.0"
+          %span Rating: #{@rating_average} /5.0
+          %br
+          %span #{@review_total} reviews
         %p
         =@video.description
         %br
@@ -16,3 +18,32 @@
         .actions
           %a.btn.btn-primary(href="") Watch Now
           %a.btn.btn-default(href="") + My Queue
+
+%section.reviews.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      -if logged_in?
+        = bootstrap_form_for([@video,@review]) do |f|
+          .row
+            .col-sm-3
+              =f.select :rating, [["Select",nil], ["1 Star",1.0], ["2 Star", 2.0], ["3 Star", 3.0], ["4 Star", 4.0], ["5 Star", 5.0]], {label: "Rate this video"}
+          .row
+            .col-sm-8
+              = f.text_area :content, label: "Write a review"
+              = f.submit "Submit", class: "btn btn-small btn-success"   
+
+      %header
+        %h3 User Reviews (#{@review_total}) 
+      %ul
+        - @video.reviews.first(8).each do |review|
+          %article.review
+            %li.row
+              .col-sm-2
+                %span Rating: #{review.rating}/ 5.0
+                %p by 
+                =link_to "#{review.user.first_name + " " + review.user.last_name}", user_path(review.user)
+                %p.small 
+                  on #{review.updated_at}
+              .col-sm-8
+                =review.content
+                        

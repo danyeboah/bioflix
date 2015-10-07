@@ -4,15 +4,16 @@ describe Video do
   it {should belong_to(:category)} 
   it {should validate_presence_of(:title)}
   it {should validate_presence_of(:description)}
+  it {should have_many(:reviews).order("created_at DESC")}
 
   describe "search_by_title" do
-    before :each do
-      the_league = Video.create(title: "The League", description: "Bros", small_cover_url: "Videos/TheLeague_small.jpg")
-      futurama = Video.create(title: "Futurama", description: "Cool Story", small_cover_url: "/tmp/futurama.jpg")
-      south_park = Video.create(title: "South Park", description: "Too funny", small_cover_url: "/tmp/south_park.jpg")
-      the_future = Video.create(title: "The Future", description: "Cool Baby", small_cover_url: "/tmp/futurama.jpg")
+    let(:south_park) {south_park = Video.create(title: "South Park", description: "Too funny", small_cover_url: "/tmp/south_park.jpg")
+}
+    let(:the_league) {the_league = Video.create(title: "The League", description: "Bros", small_cover_url: "Videos/TheLeague_small.jpg")}
+    let(:futurama) {futurama = Video.create(title: "Futurama", description: "Cool Story", small_cover_url: "/tmp/futurama.jpg")}
+    let(:the_future) {the_future = Video.create(title: "The Future", description: "Cool Baby", small_cover_url: "/tmp/futurama.jpg")}
 
-    end
+  
 
     it "returns an empty array where no match" do
       result = Video.search_by_title('boss')
@@ -21,17 +22,17 @@ describe Video do
 
     it "returns an array with a single item if there is perfect match" do
       result = Video.search_by_title('South Park')    
-      expect(result).to eq([South_Park])
+      expect(result).to eq([south_park])
     end
     
     it "returns an array with a single item if there is a partial match" do
       result = Video.search_by_title('rama')    
-      expect(result).to eq([Futurama])
+      expect(result).to eq([futurama])
     end
 
     it "returns an array of multiple items if there are partial matches" do
       result = Video.search_by_title('Futur')    
-      expect(result).to eq([Futurama, The_Future])
+      expect(result).to eq([futurama, the_future])
     end
 
   end

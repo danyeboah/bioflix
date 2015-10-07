@@ -14,8 +14,9 @@ class ApplicationController < ActionController::Base
     deny_access unless logged_in?
   end
   
+  private
   def deny_access
-    redirect_to root_path
+    redirect_to login_path
   end
 
 

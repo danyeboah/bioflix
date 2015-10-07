@@ -7,9 +7,9 @@
 
       %fieldset
         = bootstrap_form_for @user, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-4" do |f|
-          = f.text_field :firstname, label: "First name:", icon: "user"
+          = f.text_field :first_name, label: "First name:", icon: "user"
      
-          = f.text_field :lastname, label: "Last name:", icon: "user"
+          = f.text_field :last_name, label: "Last name:", icon: "user"
          
           = f.email_field :email, label: "Email address:", icon: "envelope"
           

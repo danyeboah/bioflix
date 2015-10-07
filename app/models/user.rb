@@ -5,10 +5,10 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name
   validates_presence_of :last_name
-
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: {minimum: 6}, on: :create
-
+  
+  has_many :reviews, foreign_key: :user_id
 
   has_secure_password
 
