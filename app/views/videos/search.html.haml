@@ -1,0 +1,8 @@
+%br
+.videos.row
+  -@videos.each do |video|
+    .video.col-sm-3
+      =link_to video_path(video) do
+        =image_tag(video.small_cover_url, size: '166x240')
+      %br
+      %hr
