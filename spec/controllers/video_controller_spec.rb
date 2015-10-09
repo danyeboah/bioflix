@@ -15,7 +15,7 @@ describe VideosController do
 
     describe "GET show" do
       before do
-        get :show, id: video1.slug
+        get :show, id: video1
       end
 
       it "assigns a video to video instance variable if it exists" do
@@ -27,8 +27,7 @@ describe VideosController do
       end
 
       it "assigns a new review object to review instance variable" do
-        expect(assigns(:review)).to be_new_record
-        expect(assigns(:review)).to be_instance_of(Review)
+        expect(assigns(:review)).to be_a_new(Review)
       end
     end
   
