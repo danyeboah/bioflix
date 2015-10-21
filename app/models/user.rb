@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: {minimum: 6}, on: :create
   
   has_many :reviews, foreign_key: :user_id
+  has_many :queue_items, foreign_key: :user_id
 
   has_secure_password
 

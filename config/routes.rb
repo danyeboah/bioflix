@@ -12,7 +12,9 @@ Myflix::Application.routes.draw do
   end
 
   resources :categories
-  resources :users
+  resources :users do
+    resources :queue_items
+  end
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'

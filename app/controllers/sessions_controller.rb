@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       flash["success"] = "You have been successfully logged in"
       redirect_to videos_path
     else 
-      flash["error"] = "Username or password is invalid"
+      flash["danger"] = "Username or password is invalid"
       redirect_to login_path
     end
   end
