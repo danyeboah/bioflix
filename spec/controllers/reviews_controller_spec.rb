@@ -33,7 +33,7 @@ describe ReviewsController do
         end
 
         it "should create flash message" do
-          expect(flash["success"]).not_to be_nil
+          expect(flash["success"]).to be_present
         end
       
         it "should redirect to video show page" do
@@ -52,7 +52,7 @@ describe ReviewsController do
         end
         
         it "should show flash error message" do
-          expect(flash["error"]).not_to be_nil
+          expect(flash["danger"]).to be_present
         end
 
         it "should render video show page" do

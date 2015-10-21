@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
       flash["success"] = "Review was successfully created"
       redirect_to video_path(@video)
     else
-      flash["error"] = "There was a problem saving your review"
+      flash.now["danger"] = "There was a problem saving your review"
       render 'videos/show'
     end
   end

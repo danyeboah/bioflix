@@ -43,15 +43,14 @@ describe QueueItemsController do
 
       context "non empty queue" do
         before do 
-          queue_item2 = Fabricate(:queue_item, user: user1, position: user1.queue_items.size + 1, video: video1)
-          user1.queue_items << queue_item2
-          queue_item3 = Fabricate(:queue_item, user: user1, position: user1.queue_items.size + 1, video: video2) 
-          user1.queue_items << queue_item3
+          queue_item4 = Fabricate(:queue_item, user: user1, position: user1.queue_items.size + 1, video: video1)
+          queue_item5 = Fabricate(:queue_item, user: user1, position: user1.queue_items.size + 1, video: video2) 
+          user1.reload
         end
 
         it "should create queue item with position 1 more than last queue item" do
           post :create, user_id: user1.id, video_id: video3.id
-          expect(user1.queue_items.last.position).to eq(3)   ### come back to  fix this test
+          expect(user1.queue_items.last.position).to eq(3)
         end
 
         context "video already in queue" do
@@ -64,7 +63,7 @@ describe QueueItemsController do
           end
 
           it "should display flash error message" do
-            expect(flash['error']).not_to be_empty
+            expect(flash['danger']).to be_present
           end
         end  
       end
@@ -94,21 +93,15 @@ describe QueueItemsController do
 
   context "not logged in" do
     describe "GET index" do
-      before do
-        get :index, user_id: user1
-      end
-
       it "should redirect to login page" do
+        get :index, user_id: user1
         expect(response).to redirect_to login_path 
       end
     end
 
     describe "POST create" do
-      before do
-        post :create, user_id: user1.id, video_id: video3.id
-      end
-      
       it "should redirect to login page" do
+        post :create, user_id: user1.id, video_id: video3.id
         expect(response).to redirect_to login_path 
       end
     end

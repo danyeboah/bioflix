@@ -6,10 +6,9 @@ Fabricator(:user) do
   password_confirmation {"password"}
 end
 
-Fabricator(:user2) do
-  first_name {Faker::Name.first_name}
-  last_name {Faker::Name.last_name}
-  email {Faker::Internet.email}
+Fabricator(:invalid_user, from: :user) do
+  password nil
+  password_confirmation nil
 end
 
 

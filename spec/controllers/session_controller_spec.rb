@@ -49,7 +49,7 @@ describe SessionsController do
       end
       
       it "should display error flash message" do
-        expect(flash["error"]).not_to be_nil
+        expect(flash["danger"]).to be_present
       end
 
       it "should create no session" do
@@ -71,7 +71,7 @@ describe SessionsController do
     end
     
     it "should display flash message of successful logout" do
-      expect(flash["success"]).not_to be_nil
+      expect(flash["success"]).to be_present
     end
 
     it "should redirect to root page" do

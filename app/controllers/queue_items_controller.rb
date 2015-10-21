@@ -6,16 +6,15 @@ class QueueItemsController < ApplicationController
 
   def create
     # check to see if already in queue
-    already_in_queue = current_user.queue_items.any? {|item| item.video_id == params[:video_id].to_i} 
+    already_in_queue = current_user.queue_items.pluck(:video_id).include?(params[:video_id].to_i)
     queue_item = current_user.queue_items.new(video_id: params[:video_id], position: current_user.queue_items.size + 1)
 
     if already_in_queue
-      flash['error'] = "Video already exists in your queue"
-    elsif (!already_in_queue) 
-      queue_item.save
+      flash['danger'] = "Video already exists in your queue"
     else
-      flash['error'] = "There was a problem adding this video to the queue"
+      queue_item.save
     end
+
     redirect_to user_queue_items_path(current_user)
   end
 
