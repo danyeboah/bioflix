@@ -34,7 +34,7 @@ describe SessionsController do
         expect(cookies.signed[:auth_token]).to eq(user.auth_token)
       end
 
-      it "should redirect to video show page" do
+      it "should redirect to video index page" do
         expect(response).to redirect_to(videos_path)
       end
     end

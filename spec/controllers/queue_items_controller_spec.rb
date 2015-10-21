@@ -43,8 +43,8 @@ describe QueueItemsController do
 
       context "non empty queue" do
         before do 
-          queue_item4 = Fabricate(:queue_item, user: user1, position: user1.queue_items.size + 1, video: video1)
-          queue_item5 = Fabricate(:queue_item, user: user1, position: user1.queue_items.size + 1, video: video2) 
+          Fabricate(:queue_item, user: user1, position: user1.queue_items.size + 1, video: video1)
+          Fabricate(:queue_item, user: user1, position: user1.queue_items.size + 1, video: video2) 
           user1.reload
         end
 
