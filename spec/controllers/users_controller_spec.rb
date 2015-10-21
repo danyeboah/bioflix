@@ -7,8 +7,7 @@ describe UsersController do
     end
 
     it "creates new user" do
-      expect(assigns(:user)).to be_new_record
-      expect(assigns(:user)).to be_instance_of(User)
+      expect(assigns(:user)).to be_a_new(User)
     end
 
     it "renders new template" do

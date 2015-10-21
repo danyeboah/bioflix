@@ -7,11 +7,11 @@ describe Video do
   it {should have_many(:reviews).order("created_at DESC")}
 
   describe "search_by_title" do
-    let(:south_park) {south_park = Video.create(title: "South Park", description: "Too funny", small_cover_url: "/tmp/south_park.jpg")
+    let(:south_park) {Video.create(title: "South Park", description: "Too funny", small_cover_url: "/tmp/south_park.jpg")
 }
-    let(:the_league) {the_league = Video.create(title: "The League", description: "Bros", small_cover_url: "Videos/TheLeague_small.jpg")}
-    let(:futurama) {futurama = Video.create(title: "Futurama", description: "Cool Story", small_cover_url: "/tmp/futurama.jpg")}
-    let(:the_future) {the_future = Video.create(title: "The Future", description: "Cool Baby", small_cover_url: "/tmp/futurama.jpg")}
+    let(:the_league) {Video.create(title: "The League", description: "Bros", small_cover_url: "Videos/TheLeague_small.jpg")}
+    let(:futurama) {Video.create(title: "Futurama", description: "Cool Story", small_cover_url: "/tmp/futurama.jpg")}
+    let(:the_future) {Video.create(title: "The Future", description: "Cool Baby", small_cover_url: "/tmp/futurama.jpg")}
 
   
 

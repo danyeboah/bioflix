@@ -5,19 +5,19 @@ describe Category do
 
   describe '#recent_videos' do
     
-    let!(:comedy) {comedy = Category.create(name: "Comedy")}
-    let(:the_league) {the_league = Video.create(title: "The League", description: "Bros", category: comedy, created_at: 1.day.ago)
+    let!(:comedy) {Category.create(name: "Comedy")}
+    let(:the_league) {Video.create(title: "The League", description: "Bros", category: comedy, created_at: 1.day.ago)
 }  
-    let(:futurama) {futurama = Video.create(title: "Futurama", description: "Cool Story", category: comedy, created_at: 3.days.ago)
+    let(:futurama) {Video.create(title: "Futurama", description: "Cool Story", category: comedy, created_at: 3.days.ago)
 }
-    let(:south_park) {south_park = Video.create(title: "South Park", description: "Too funny",category: comedy, created_at: 8.days.ago)
+    let(:south_park) {Video.create(title: "South Park", description: "Too funny",category: comedy, created_at: 8.days.ago)
 }
-    let(:scandal) {scandal = Video.create(title: "Scandal", description: "nice", category: comedy, created_at: 5.days.ago)
+    let(:scandal) {Video.create(title: "Scandal", description: "nice", category: comedy, created_at: 5.days.ago)
 }
-    let(:lost) {lost = Video.create(title: "Lost", description: "sweet", category: comedy, created_at: 6.days.ago)
+    let(:lost) {Video.create(title: "Lost", description: "sweet", category: comedy, created_at: 6.days.ago)
 }
 
-    let(:the_future) {the_future = Video.create(title: "The Future", description: "Cool Baby", category: comedy, created_at: 2.days.ago)}
+    let(:the_future) {Video.create(title: "The Future", description: "Cool Baby", category: comedy, created_at: 2.days.ago)}
 
 
     it 'should return 6 videos ordered by recency(created) where there are more than 6 videos' do

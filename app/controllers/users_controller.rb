@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-#require 'pry'
   def new
     @user = User.new
   end
