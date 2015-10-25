@@ -23,15 +23,7 @@
   .row
     .col-sm-10.col-sm-offset-1
       -if logged_in?
-        = bootstrap_form_for([@video,@review]) do |f|
-          .row
-            .col-sm-3
-              =f.select :rating, [["Select",nil], ["1 Star",1.0], ["2 Star", 2.0], ["3 Star", 3.0], ["4 Star", 4.0], ["5 Star", 5.0]], {label: "Rate this video"}
-          .row
-            .col-sm-8
-              = f.text_area :content, label: "Write a review"
-              = f.submit "Submit", class: "btn btn-small btn-success"   
-
+        = render 'reviewform' 
       %header
         %h3 User Reviews (#{@review_total}) 
       %ul
@@ -44,6 +36,13 @@
                 =link_to "#{review.user.first_name + " " + review.user.last_name}", user_path(review.user)
                 %p.small 
                   on #{review.updated_at}
+                %p
+                  -if review.user ==current_user
+                    =link_to "edit review", edit_video_review_path(@video,review)
+                    %p
+                    =link_to "delete review", video_review_path(@video,review), method: :delete
+
               .col-sm-8
-                =review.content
+                =review.content if review.content
+
                         

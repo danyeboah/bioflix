@@ -9,13 +9,25 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: {minimum: 6}, on: :create
   
   has_many :reviews, foreign_key: :user_id
-  has_many :queue_items, foreign_key: :user_id
+  has_many :queue_items,-> {order 'position'}, foreign_key: :user_id
 
   has_secure_password
 
 
   before_save do 
     generate_token(:auth_token)
+  end
+
+  def reorder
+    QueueItem.transaction do 
+      queue_items = self.queue_items
+      i = 1
+      queue_items.each do |item|
+        item.position = i
+        item.save
+        i += 1
+      end
+    end
   end
 
   # generate random token for login
