@@ -20,7 +20,7 @@ describe Category do
     let(:the_future) {Video.create(title: "The Future", description: "Cool Baby", category: comedy, created_at: 2.days.ago)}
 
 
-    it 'should return 6 videos ordered by recency(created) where there are more than 6 videos' do
+    it 'returns 6 videos ordered by recency(created) where there are more than 6 videos' do
       the_league
       the_future
       futurama
@@ -31,7 +31,7 @@ describe Category do
       expect(comedy.recent_videos(6)).to eq([the_league,the_future,futurama,scandal,lost,south_park])
     end
 
-    it 'should return the exact number of videos where videos are less than 6' do
+    it 'returns the exact number of videos where videos are less than 6' do
       futurama
       south_park
       the_league
@@ -39,7 +39,7 @@ describe Category do
       expect(comedy.recent_videos(6).count).to eq(4)
     end
 
-    it 'should return an empty array where there are no videos' do
+    it 'returns an empty array where there are no videos' do
       expect(comedy.recent_videos(6)).to eq([])
     end
   end

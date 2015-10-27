@@ -3,6 +3,7 @@ class Review < ActiveRecord::Base
   belongs_to :video, foreign_key: :video_id
 
   validates :rating, presence: true
+  validates :content, presence: true
 end
 
 

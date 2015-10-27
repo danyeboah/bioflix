@@ -21,11 +21,9 @@ class User < ActiveRecord::Base
   def reorder
     QueueItem.transaction do 
       queue_items = self.queue_items
-      i = 1
-      queue_items.each do |item|
-        item.position = i
+      queue_items.each_with_index do |item,index|
+        item.position = index + 1
         item.save
-        i += 1
       end
     end
   end
