@@ -18,7 +18,6 @@ class QueueItemsController < ApplicationController
     redirect_to user_queue_items_path(current_user)
   end
 
-require 'pry'
   def update_queue
     begin
       QueueItem.transaction do
