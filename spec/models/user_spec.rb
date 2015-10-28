@@ -9,5 +9,6 @@ describe User do
   it {should validate_presence_of(:password).on(:create)}
   it {should have_secure_password}
   it {should have_many(:reviews)}
+  it {should have_many(:queue_items).order("position")}
 
 end

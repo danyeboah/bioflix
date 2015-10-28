@@ -30,11 +30,11 @@ describe SessionsController do
         expect(flash["success"]).not_to be_nil
       end
 
-      it "should assign a permanent cookie if remember me selected" do
+      it "assigns a permanent cookie if remember me selected" do
         expect(cookies.signed[:auth_token]).to eq(user.auth_token)
       end
 
-      it "should redirect to video index page" do
+      it "redirects to video index page" do
         expect(response).to redirect_to(videos_path)
       end
     end
@@ -44,15 +44,15 @@ describe SessionsController do
         post :create, email: user.email
       end
 
-      it "should redirect to login page" do
+      it "redirects to login page" do
         expect(response).to redirect_to(login_path)
       end
       
-      it "should display error flash message" do
+      it "displays error flash message" do
         expect(flash["danger"]).to be_present
       end
 
-      it "should create no session" do
+      it "creates no session" do
         expect(cookies.signed[:auth_token]).to be_nil
       end
     end
@@ -66,15 +66,15 @@ describe SessionsController do
 
     end
 
-    it "should destroy cookie" do
+    it "destroys cookie" do
       expect(cookies.signed[:auth_token]).to be_nil
     end
     
-    it "should display flash message of successful logout" do
+    it "displays flash message of successful logout" do
       expect(flash["success"]).to be_present
     end
 
-    it "should redirect to root page" do
+    it "redirects to root page" do
       expect(response).to redirect_to(root_path)
     end
   end
