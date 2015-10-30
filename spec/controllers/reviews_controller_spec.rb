@@ -6,9 +6,7 @@ describe ReviewsController do
   let(:review1) {Fabricate(:review)}
 
   context "authenticated user" do
-    before do
-      cookies.signed[:auth_token] = user1.auth_token
-    end
+    before { sign_in(user1)}
 
     describe "POST create" do
       it "assigns the selected video to video instance variable" do
@@ -138,30 +136,26 @@ describe ReviewsController do
 
   context "unauthenticated user" do
     describe "POST create" do 
-      it "redirects to login page" do
-        post :create, video_id: video1.slug, review: Fabricate.attributes_for(:review)
-        expect(response).to redirect_to(login_path)
+      it_behaves_like "requires sign-in" do
+        let(:action) {post :create, video_id: video1.slug, review: Fabricate.attributes_for(:review)}
       end
     end
 
     describe "GET edit" do
-      it "redirects to login page" do
-        get :edit, video_id: video1, id: review1.id 
-        expect(response).to redirect_to(login_path)
+      it_behaves_like "requires sign-in" do
+        let(:action) {get :edit, video_id: video1, id: review1.id} 
       end
     end
 
     describe "PATCH update" do
-      it "redirects to login page" do
-        patch :update, review: {content: "cool", rating: 4}, video_id: video1, id: review1.id
-        expect(response).to redirect_to(login_path)
+      it_behaves_like "requires sign-in" do
+        let(:action) {patch :update, review: {content: "cool", rating: 4}, video_id: video1, id: review1.id}
       end
     end
 
     describe "DELETE destroy" do
-      it "redirects to login page" do
-        delete :destroy, video_id: video1, id: review1.id
-        expect(response).to redirect_to(login_path)
+      it_behaves_like "requires sign-in" do
+        let(:action) {delete :destroy, video_id: video1, id: review1.id}
       end
     end
 
