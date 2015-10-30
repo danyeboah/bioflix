@@ -113,7 +113,7 @@ describe QueueItemsController do
         context "update to position" do
           it "rearranges queue_items" do
             post :update_queue,user_id: current_user, queue_items: [{id: 1, position: 3}, {id: 2, position: 1}, {id: 3, position: 2}]
-            expect(current_user.queue_items).to match_array([queue_item2, queue_item3, queue_item1])
+            expect(queue_item2.reload.position).to eq(1)
           end
 
           it "normalizes rearrangement where user enters position more than number of queue_items" do

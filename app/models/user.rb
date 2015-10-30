@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
     generate_token(:auth_token)
   end
 
+  def video_in_user_queue(video_id)
+    self.queue_items.pluck(:video_id).include?(video_id)
+  end
+
   def reorder
     QueueItem.transaction do 
       self.queue_items.each_with_index do |item,index|

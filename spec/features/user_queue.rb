@@ -22,7 +22,7 @@ feature "add videos to user queue" do
 
   scenario "my queue button removed when video already added to my queue" do
     find("a[href='/videos/#{movie1.slug}']").click
-    find_link("Video Is In Your Queue").visible?
+    expect(page).to have_content("Video Is In Your Queue")
   end
 
   scenario "video order is correct in my queue" do

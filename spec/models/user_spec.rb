@@ -11,4 +11,17 @@ describe User do
   it {should have_many(:reviews)}
   it {should have_many(:queue_items).order("position")}
 
+  it "returns true if video is in the users queue" do
+    user1 = Fabricate(:user)
+    video1 = Fabricate(:video)
+    video2 = Fabricate(:video)
+    video3 = Fabricate(:video)
+
+    queue_item1 = Fabricate(:queue_item, user: user1, video: video1)
+    queue_item2 = Fabricate(:queue_item, user: user1, video: video2)
+    queue_item3 = Fabricate(:queue_item, user: user1, video: video3)
+
+    expect(user1.video_in_user_queue(video2.id)).to be true
+  end
+
 end
