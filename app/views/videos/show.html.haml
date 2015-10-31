@@ -17,7 +17,7 @@
         %hr
         .actions
           %a.btn.btn-primary(href="") Watch Now
-          -if !current_user.video_in_user_queue(@video.id)
+          -if !current_user.video_in_user_queue?(@video.id)
             =link_to "+My Queue", user_queue_items_path(current_user, video_id: @video.id), method: :post, class: "btn btn-success"
           -else
             %br 
