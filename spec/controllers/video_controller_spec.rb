@@ -8,10 +8,7 @@ describe VideosController do
 
 
   context "user signed in" do
-    before do
-      user = Fabricate(:user)
-      cookies.signed[:auth_token] = user.auth_token
-    end
+    before {sign_in}
 
     describe "GET show" do
       before do
@@ -48,9 +45,8 @@ describe VideosController do
 
   context "user not signed in" do
     describe "GET show" do
-      it "redirect to login path" do
-        get :show, id: video1.slug
-        expect(response).to redirect_to(login_path)
+      it_behaves_like "requires sign-in" do
+        let(:action) {get :show, id: video1.slug}
       end
     end 
   end

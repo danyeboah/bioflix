@@ -13,9 +13,12 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-
   before_save do 
     generate_token(:auth_token)
+  end
+
+  def video_in_user_queue?(video_id)
+    self.queue_items.pluck(:video_id).include?(video_id)
   end
 
   def reorder

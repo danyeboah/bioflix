@@ -17,7 +17,14 @@
         %hr
         .actions
           %a.btn.btn-primary(href="") Watch Now
-          =link_to "+My Queue", user_queue_items_path(current_user, video_id: @video.id), method: :post, class: "btn btn-success"
+          -if !current_user.video_in_user_queue?(@video.id)
+            =link_to "+My Queue", user_queue_items_path(current_user, video_id: @video.id), method: :post, class: "btn btn-success"
+          -else
+            %br 
+            %br
+            %p
+              =link_to "Video Is In Your Queue", user_queue_items_path(current_user)
+              
 
 %section.reviews.container
   .row
