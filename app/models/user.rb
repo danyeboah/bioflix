@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
     generate_token(:auth_token)
   end
 
+  def self.random_users
+    User.take(10).sample(5)
+  end
+
   def video_in_user_queue?(video_id)
     self.queue_items.pluck(:video_id).include?(video_id)
   end
@@ -33,7 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    full_name = self.first_name + " " + self.last_name
+    "#{self.first_name} #{self.last_name}"
   end
 
   def reorder

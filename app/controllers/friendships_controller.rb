@@ -4,7 +4,7 @@ class FriendshipsController < ApplicationController
 
   def create
     leader = User.find(params[:leader_id])
-    if current_user.id == params[:leader_id].to_i
+    if current_user == leader
       flash["danger"] = "You can't follow yourself"
       redirect_to user_path(current_user)
       return
@@ -13,11 +13,11 @@ class FriendshipsController < ApplicationController
       redirect_to user_friendships_path(current_user)
       return
     else
-      newfriends = Friendship.new(leader_id: params[:leader_id], follower_id: current_user.id) 
+      friendship = Friendship.new(leader: leader, follower: current_user) 
     end 
 
-    if newfriends.save
-      flash["success"] = "You are now following #{newfriends.leader.first_name}"
+    if friendship.save
+      flash["success"] = "You are now following #{friendship.leader.first_name}"
     else
       flash["danger"] = "There was an error following #{User.find(params[:leader_id])}"
     end

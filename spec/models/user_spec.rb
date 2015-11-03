@@ -13,9 +13,13 @@ describe User do
   it {should have_many(:following_relationships)}
   it {should have_many(:leading_relationships)}
 
-   user2 = Fabricate(:user, first_name: "Jane", last_name: "Doe")
-   user3 = Fabricate(:user)
-   friendship1 = Fabricate(:friendship, leader: user3, follower: user2)
+  let!(:user2) {Fabricate(:user, first_name: "Jane", last_name: "Doe")}
+  let!(:user3) {Fabricate(:user)}
+  let!(:user4) {Fabricate(:user)}
+  let!(:user5) {Fabricate(:user)}
+  let!(:user6) {Fabricate(:user)}
+    
+  let!(:friendship1) {Fabricate(:friendship, leader: user3, follower: user2)}
 
   describe "#video_in_user_queue?" do
     it "returns true if video is in the users queue" do
@@ -54,4 +58,9 @@ describe User do
     end
   end
 
+  describe "#self.random_users" do
+    it "returns 5 random users" do
+      expect(User.random_users).to match_array([user2,user3,user4,user5,user6])
+    end
+  end
 end

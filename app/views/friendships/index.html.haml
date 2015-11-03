@@ -12,7 +12,7 @@
       - current_user.following_relationships.each do |relationship|
         %tr
           %td
-            = link_to "#{relationship.leader.full_name}", user_path(relationship.leader)
+            = link_to relationship.leader.full_name, relationship.leader
           %td.extra-padding 
             = relationship.leader.queue_items.count
           %td.extra-padding 
@@ -28,9 +28,9 @@
   %h3 Others Users You Can Follow
   %hr
   %ul
-    -random_users.each do |user|
+    -User.random_users.each do |user|
       %li
-        = link_to "#{user.full_name}", user_path(user)
+        = link_to user.full_name, user
 
 
 
