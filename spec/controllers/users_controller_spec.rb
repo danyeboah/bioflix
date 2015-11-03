@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe UsersController do
+  let(:user1) {Fabricate(:user)}  
+  
   describe "GET new" do
     before do
       get :new
@@ -16,8 +18,6 @@ describe UsersController do
   end
 
   describe "POST create" do
-    let(:user1) {Fabricate(:user)}
-
     context "valid input" do
       before do
         post :create, user: Fabricate.attributes_for(:user) 
@@ -43,6 +43,29 @@ describe UsersController do
 
       it "does not save if user is invalid(no user in database)" do
         expect(User.count).to eq(0)
+      end
+    end
+  end
+
+  describe "GET show" do
+    context "signed-in" do
+      before do 
+        sign_in(user1)
+        get :show, id: user1
+      end
+      
+      it "assigns user to user instance variable" do
+        expect(assigns(:user)).to eq(user1)
+      end
+
+      it "renders show page" do
+        expect(response).to render_template(:show)
+      end
+    end
+
+    context "not signed-in" do
+      it_behaves_like "requires sign-in" do
+        let(:action) {get :show, id: user1}
       end
     end
   end
