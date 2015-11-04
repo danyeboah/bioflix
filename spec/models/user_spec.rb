@@ -8,8 +8,18 @@ describe User do
   it {should validate_length_of(:password).on(:create)}
   it {should validate_presence_of(:password).on(:create)}
   it {should have_secure_password}
-  it {should have_many(:reviews)}
+  it {should have_many(:reviews).order("created_at DESC")}
   it {should have_many(:queue_items).order("position")}
+  it {should have_many(:following_relationships)}
+  it {should have_many(:leading_relationships)}
+
+  let!(:user2) {Fabricate(:user, first_name: "Jane", last_name: "Doe")}
+  let!(:user3) {Fabricate(:user)}
+  let!(:user4) {Fabricate(:user)}
+  let!(:user5) {Fabricate(:user)}
+  let!(:user6) {Fabricate(:user)}
+    
+  let!(:friendship1) {Fabricate(:friendship, leader: user3, follower: user2)}
 
   describe "#video_in_user_queue?" do
     it "returns true if video is in the users queue" do
@@ -26,4 +36,31 @@ describe User do
     end
   end
 
+  describe "#follows?" do
+    it "returns true if user is following other user" do
+      expect(user2.follows?(user3)).to be true
+    end
+  end
+
+  describe "#can_follow?" do
+    it "returns false if user is current user" do
+      expect(user2.can_follow?(user2)).to be false
+    end
+
+    it "returns false if user is already following other user" do
+      expect(user2.can_follow?(user3)).to be false
+    end
+  end
+
+  describe "#full_name" do
+    it "returns user's full name" do
+      expect(user2.full_name).to eq("Jane Doe")
+    end
+  end
+
+  describe "#self.random_users" do
+    it "returns 5 random users" do
+      expect(User.random_users).to match_array([user2,user3,user4,user5,user6])
+    end
+  end
 end

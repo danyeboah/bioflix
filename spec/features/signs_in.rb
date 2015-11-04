@@ -1,4 +1,4 @@
-require 'spec_helper'
+=require 'spec_helper'
 
 feature "signing in" do
   scenario "with existing username and password" do
