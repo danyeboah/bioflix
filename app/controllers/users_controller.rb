@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params) 
     if @user.save
       flash["success"] = "Your account has been created"
+      AppMailer.send_welcome_mail(@user).deliver
       cookies.signed[:auth_token] = @user.auth_token 
       redirect_to videos_path
     else
