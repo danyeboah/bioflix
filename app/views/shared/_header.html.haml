@@ -1,15 +1,14 @@
 %section#top-header.row
   %h1.col-md-2
-    = link_to "MyFLiX", root_path
+    = link_to "BioFLiX", root_path
   = if logged_in?
     %ul.col-md-4.clearfix
       %li= link_to "Videos", videos_path
       %li= link_to "My Queue",user_queue_items_path(current_user)
       %li= link_to "People",user_friendships_path(current_user)
-    %form.col-md-5.navbar-form(action="videos/search" method = "get")
-      .form-group
-        %input.form-control(type="text" placeholder="Search for videos here" id = "query" name = "query")
-      %button.btn.btn-default(type="submit") Search
+    = form_tag search_videos_path, class: "span5 for-search" do
+      %input.search-query(name="search_term" type="text" placeholder= "Search for videos here")
+      %button.btn.shift_right(type="submit") Search
     #user_links.pull-right
       %ul
         %li.dropdown
