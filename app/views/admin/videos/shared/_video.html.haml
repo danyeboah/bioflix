@@ -1,0 +1,8 @@
+=bootstrap_form_for([:admin,@video], layout: :horizontal, control_col: "col-sm-5", html: {multipart: true}) do |f|
+  =f.text_field :title
+  =f.text_area :description
+  =f.select :category_id, options_for_select( @categories.map {|category| [category.name, category.id]}), label: "Category"
+  =f.file_field :small_cover
+  =f.file_field :large_cover
+  =f.text_field :video_url
+  =f.submit action, class: "btn btn-success"

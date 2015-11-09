@@ -11,7 +11,6 @@
                 %tr
                   %th(width="10%") List Order
                   %th(width="30%") Video Title
-                  %th(width="10%") Play
                   %th(width="20%") Rating
                   %th(width="15%") Genre
                   %th(width="15%") Remove
@@ -23,8 +22,6 @@
                     =text_field_tag "queue_items[][position]", queue_item.position
                   %td
                     = link_to queue_item.video.title, video_path(queue_item.video) 
-                  %td
-                    = button_to "Play", nil, class: "btn btn-default"
                   %td
                     = select_tag "queue_items[][rating]",rating_options(queue_item.rating), include_blank: true
                   %td

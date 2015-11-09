@@ -15,6 +15,10 @@ gem 'bcrypt-ruby'
 gem 'fabrication'
 gem 'faker'
 gem 'figaro'
+gem 'carrierwave'
+gem 'carrierwave-aws'
+gem 'mini_magick'
+gem 'fog'
 
 group :development do
   gem 'thin'

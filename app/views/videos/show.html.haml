@@ -1,8 +1,13 @@
 %article.video
   .container
     .row
-      .video_large_cover.col-sm-7.col-sm-offset-1
-        =image_tag(@video.large_cover_url, size: "675x375")
+      .video_large_cover.col-sm-7.col-sm-offset-1  
+        -if youtube?(@video)
+          %iframe(width = "675" height = "375" src = "#{@video.video_url}" frameborder = "0" allowfullscreen)
+        -else
+
+          %video(width = "675" height = "375" controls src = "#{@video.video_url}" poster = "#{@video.large_cover}" Your browser does not support html5)
+        
       .video_info.col-sm-3
         %header
           %h3.lead 
@@ -16,7 +21,6 @@
         %br
         %hr
         .actions
-          %a.btn.btn-primary(href="") Watch Now
           -if !current_user.video_in_user_queue?(@video.id)
             =link_to "+My Queue", user_queue_items_path(current_user, video_id: @video.id), method: :post, class: "btn btn-success"
           -else
@@ -24,6 +28,12 @@
             %br
             %p
               =link_to "Video Is In Your Queue", user_queue_items_path(current_user)
+            %br
+          - if current_user.admin
+            %p 
+              =link_to "Edit Video", edit_admin_video_path(@video)
+            %p
+              =link_to "Delete Video",admin_video_path(@video), method: :delete
               
 
 %section.reviews.container
