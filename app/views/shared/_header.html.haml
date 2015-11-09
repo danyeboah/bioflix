@@ -1,11 +1,13 @@
 %section#top-header.row
   %h1.col-md-2
     = link_to "BioFLiX", root_path
-  = if logged_in?
+  - if logged_in?
     %ul.col-md-4.clearfix
       %li= link_to "Videos", videos_path
       %li= link_to "My Queue",user_queue_items_path(current_user)
       %li= link_to "People",user_friendships_path(current_user)
+      - if current_user.admin
+        %li= link_to "Admin Page", new_admin_video_path
     = form_tag search_videos_path, class: "span5 for-search" do
       %input.search-query(name="search_term" type="text" placeholder= "Search for videos here")
       %button.btn.shift_right(type="submit") Search

@@ -1,0 +1,30 @@
+%section.admin_add_video
+  .container
+    .row
+      .col-md-10.col-md-offset-1
+        %ul.nav.nav-pills
+          %li
+            %a(href="/ui/admin_views_payments") Recent Payments
+          %li
+            =link_to "Add a New Video",new_admin_video_path
+          %li.active
+            =link_to "Add a Category", " "
+        %br
+        %hr
+        =render "admin/categories/shared/category", url: admin_categories_path, method: "post"
+
+        %br
+        %hr
+        %h3 Categories
+        %hr
+        %ul 
+          -@all_categories.each do |category|
+            %li
+              ="#{category.name} (#{category.videos.count})" 
+              =link_to "edit", edit_admin_category_path(category)
+              =link_to "delete", admin_category_path(category), method: :delete, class: "shift_right"
+              %hr
+      
+              
+
+

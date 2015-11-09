@@ -3,7 +3,9 @@ class Category < ActiveRecord::Base
   has_many :videos, foreign_key: :category_id
   sluggable_column :name
 
-  before_save :generate_slug
+  before_create :generate_slug
+
+  validates :name, uniqueness: true
 
 
   def recent_videos(number)

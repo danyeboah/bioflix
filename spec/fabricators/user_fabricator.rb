@@ -4,11 +4,16 @@ Fabricator(:user) do
   email {Faker::Internet.email}
   password {"password"}
   password_confirmation {"password"}
+  admin {false}
 end
 
 Fabricator(:invalid_user, from: :user) do
   password nil
   password_confirmation nil
+end
+
+Fabricator(:admin, from: :user) do
+  admin {true}
 end
 
 
