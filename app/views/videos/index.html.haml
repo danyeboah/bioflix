@@ -9,6 +9,8 @@
           .video.col-sm-3
             =link_to video_path(video) do
               =image_tag(video.small_cover, size: "166x236")
+              %p
+                =video.title
       %br
       %hr
 

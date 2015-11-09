@@ -1,5 +1,5 @@
 CarrierWave.configure do |config|
-  #if Rails.env.staging? || Rails.env.production?
+  if Rails.env.staging? || Rails.env.production?
     config.storage    = :aws
     config.aws_bucket = ENV.fetch('S3_BUCKET_NAME')
     config.aws_acl    = 'public-read'
@@ -26,7 +26,7 @@ CarrierWave.configure do |config|
     # Optional: Signing of download urls, e.g. for serving private
     # content through CloudFront.
     #config.aws_signer = -> (unsigned_url, options) { Aws::CF::Signer.sign_url unsigned_url, options }
-  #else
-  #  config.storage = :file
-  #end
+  else
+    config.storage = :file
+  end
 end
