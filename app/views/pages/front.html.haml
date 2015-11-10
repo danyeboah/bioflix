@@ -2,7 +2,6 @@
   %h1
     Share and watch nature in all its awesomeness.
     = link_to "Sign Up Now!", new_user_path
-  %p.sign_up
   %p.sign_in
     Have an account? Please
     = link_to "Sign In", login_path
@@ -10,7 +9,7 @@
   %hr
   .container
     .row
-      .col-md-3
+      .col-md-3.col-md-offset-3
         %img(src = "https://s3-us-west-2.amazonaws.com/bioflix/kinesin.gif" width = "250px" height = "250px")
      
       .col-md-3.col-md-offset-1
