@@ -3,9 +3,9 @@
     .row
       .video_large_cover.col-md-7.col-sm-offset-1  
         -if youtube?(@video)
-          %iframe(width = "675" height = "375" src = "#{@video.video_url}" frameborder = "0" allowfullscreen)
+          %iframe(width = "100%" height = "375" src = "#{@video.video_url}" frameborder = "0" allowfullscreen)
         -else
-          %video(width = "675" height = "375" controls src = "#{@video.video_url}" poster = "#{@video.large_cover}" Your browser does not support html5)
+          %video(width = "100%" height = "375" controls src = "#{@video.video_url}" poster = "#{@video.large_cover}" Your browser does not support html5)
         
       .video_info.col-md-3
         %header
